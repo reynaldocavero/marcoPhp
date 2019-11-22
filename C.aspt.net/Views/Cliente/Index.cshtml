@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table>
+    <tr>
+        <td>ID</td>
+        <td>Nombre</td>
+        <td>Precio</td>
+        <td>Stock</td>
+    </tr>
+    <tbody id="lista"></tbody>
+</table>
+<button id="btnAgregar">Agregar</button>
+<script src="~/Scripts/Modulos/Cliente.js"></script>
+@section scripts {
+    <script>
+        EMD.BusquedaClientes.init();
+
+        $('#btnAgregar').on('click', function () {
+            var xml = '<Clientes>';
+            $('#lista tr').each(function () {
+                xml += '<Cliente><nombre>' + $(this).find("td").eq(1).html() + '</nombre>' +
+                  '<numero>' + $(this).find("td").eq(2).html() + '</numero>' +
+                  '<activo>' + $(this).find("td").eq(3).html() + '</activo></Cliente>';
+             });
+
+
+           xml+= '</Clientes>';
+            EMD.BusquedaClientes.insPoducto(xml);
+        });
+    </script>
+
+}
